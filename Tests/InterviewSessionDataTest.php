@@ -62,85 +62,67 @@ class InterviewSessionDataTest extends AbstractInterviewSessionDataTestCase
 
     public function testJsonSingleInterviewSessionAnswer()
     {
-        $data = $this->generateInterviewSessionData();
-
-        $answer = $this->generateAnswer('normal');
-
-        $data->addAnswer($answer);
+        $data = $this->generateInterviewSessionDataWithNonMixedAnswers(null, null, null, 'normal', 1);
 
         $jsonObj = $this->generateJsonObjInterviewSessionData($data->getInterview(), $data->getNote(), $data->getInterviewSession());
 
-        $jsonObj->Answers = [
-            json_decode($this->convertMockAnswerToJsonAnswer($answer)),
-        ];
+        foreach ($data->getAnswers() as $answer) {
+            $jsonObj->Answers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
+        }
 
         $this->assertEquals(json_encode($jsonObj), $data->json());
     }
 
     public function testJsonMultipleInterviewSessionAnswers()
     {
-        $data = $this->generateInterviewSessionData();
+        $data = $this->generateInterviewSessionDataWithNonMixedAnswers(null, null, null, 'normal', mt_rand(3,5));
 
-        $answers = $this->generateAnswers('normal', mt_rand(3,5));
+        $answers = $data->getAnswers();
 
         $this->assertTrue(count($answers) > 1);
 
-        $jsonAnswers = [];
-        foreach ($answers as $answer) {
-            $data->addAnswer($answer);
-            $jsonAnswers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
-        }
-
         $jsonObj = $this->generateJsonObjInterviewSessionData($data->getInterview(), $data->getNote(), $data->getInterviewSession());
 
-        $jsonObj->Answers = $jsonAnswers;
+        foreach ($data->getAnswers() as $answer) {
+            $jsonObj->Answers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
+        }
 
         $this->assertEquals(json_encode($jsonObj), $data->json());
     }
 
     public function testJsonSingleRepeatableTableRowAnswer()
     {
-        $data = $this->generateInterviewSessionData();
-
-        /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|AnswerInterface $answer
-         */
-        $answer = $this->generateAnswer('repeatable');
-
-        $data->addAnswer($answer);
+        $data = $this->generateInterviewSessionDataWithNonMixedAnswers(null, null, null, 'repeatable', 1);
 
         $jsonObj = $this->generateJsonObjInterviewSessionData($data->getInterview(), $data->getNote(), $data->getInterviewSession());
 
-        $jsonObj->Answers = [
-            json_decode($this->convertMockAnswerToJsonAnswer($answer)),
-        ];
+        foreach ($data->getAnswers() as $answer) {
+            $jsonObj->Answers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
+        }
 
         $this->assertEquals(json_encode($jsonObj), $data->json());
     }
 
     public function testJsonMultipleRepeatableTableRowAnswers()
     {
-        $data = $this->generateInterviewSessionData();
+        $data = $this->generateInterviewSessionDataWithNonMixedAnswers(null, null, null, 'repeatable', mt_rand(3,5));
 
-        $answers = $this->generateAnswers('repeatable', mt_rand(3,5));
+        $answers = $data->getAnswers();
 
         $this->assertTrue(count($answers) > 1);
 
-        $jsonAnswers = [];
-        foreach ($answers as $answer) {
-            $data->addAnswer($answer);
-            $jsonAnswers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
-        }
-
         $jsonObj = $this->generateJsonObjInterviewSessionData($data->getInterview(), $data->getNote(), $data->getInterviewSession());
 
-        $jsonObj->Answers = $jsonAnswers;
+        foreach ($data->getAnswers() as $answer) {
+            $jsonObj->Answers[] = json_decode($this->convertMockAnswerToJsonAnswer($answer));
+        }
 
         $this->assertEquals(json_encode($jsonObj), $data->json());
     }
 
     public function testJsonMixedAnswers()
     {
+        // don't use with answers generator to guarantee mixed answers
         $data = $this->generateInterviewSessionData();
 
         $jsonAnswers = [];

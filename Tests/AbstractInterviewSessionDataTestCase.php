@@ -161,39 +161,20 @@ abstract class AbstractInterviewSessionDataTestCase extends TestCase
      * @param null $note
      * @param null $interviewSessionId
      * @param string $answerType
-     * @param null|int|array $numAnswers null will default to 1; integer will assign value to both if mixed; array will
-     *     be [normal, repeatable]
-     * @return mixed
+     * @param null|int|array $numAnswers null will default to 1;
+     * @return InterviewSessionData
      */
-    protected function generateInterviewSessionDataWithAnswers($interviewId = null, $note = null, $interviewSessionId = null, $answerType = 'mixed', $numAnswers = null)
+    protected function generateInterviewSessionDataWithNonMixedAnswers($interviewId = null, $note = null, $interviewSessionId = null, $answerType = 'normal', $numAnswers = null)
     {
         $data = $this->generateInterviewSessionData($interviewId, $note, $interviewSessionId);
 
-        switch (strtolower($answerType)) {
-            case 'mixed':
-                // no break
-            default:
-                if (is_array($numAnswers)) {
-                    if (2 === count($numAnswers)) {
-                        if (array_key_exists('normal', $numAnswers) && array_key_exists('repeatable', $numAnswers)) {
-                            $numNormal = $numAnswers['normal'];
-                            $numRepeatable = $numAnswers['repeatable'];
-                        } else {
-                            $numNormal = $numAnswers[0];
-                            $numRepeatable = $numAnswers[1];
-                        }
-                    } else {
-                        return $this->generateInterviewSessionDataWithAnswers($interviewId, $note, $interviewSessionId, $answerType, array_pop($numAnswers));
-                    }
-                } else if (is_int($numAnswers)) {
-                    $numNormal = $numAnswers;
-                    $numRepeatable = $numAnswers;
-                } else {
-                    $numNormal = 1;
-                    $numRepeatable = 1;
-                }
-                break;
+        $answers = $this->generateAnswers($answerType, $numAnswers);
+
+        foreach ($answers as $answer) {
+            $data->addAnswer($answer);
         }
+
+        return $data;
     }
 
     /**
