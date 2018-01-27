@@ -29,48 +29,10 @@
  *
  */
 
-namespace Chance\DocumentAssembly\LegacySdk\Model;
+namespace Chance\DocumentAssembly\LegacySdk\Exception;
 
-use GuzzleHttp\Client;
-
-class GuzzleExport extends AbstractLegacyExport
+class LegacyExportException extends \LogicException
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * @return Client
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
-     * @param Client $client
-     */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    public function export()
-    {
-        $documentAssemblyData = $this->getInterviewSessionData();
-
-        $transportMethod = $this->getExportTransportMethod();
-
-        return $this->client->request(
-            $transportMethod,
-            $this->getUri(),
-            [
-                'json' => [
-                    'data' => $documentAssemblyData->json(),
-                ]
-            ]
-        );
-    }
-
+    const DOMAIN_NOT_FOUND = 100000;
+    const INSTANCE_NAME_NOT_FOUND = 100001;
 }

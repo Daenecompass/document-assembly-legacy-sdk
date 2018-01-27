@@ -31,17 +31,24 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
+use Chance\DocumentAssembly\LegacySdk\Exception\LegacyExportException;
+
 /**
  * Class AbstractLegacyExport
  * @package Chance\DocumentAssembly\LegacySdk\Model
  *
  * for use with DraftOnce/JustFillOut API v1
  */
-abstract class AbstractLegacyExport implements DocumentAssemblyExporterInterface
+abstract class AbstractLegacyExport implements DocumentAssemblyLegacyExportInterface
 {
-    private $instanceDomain;
+    const EDIT_TRANSPORT_METHOD = 'PUT';
+    const ADD_TRANSPORT_METHOD = 'POST';
 
-    private $uri;
+    private $instanceName;
+
+    private $protocol = 'http';
+
+    protected $domain;
 
     private $instanceApiKey;
 
@@ -50,38 +57,81 @@ abstract class AbstractLegacyExport implements DocumentAssemblyExporterInterface
     /**
      * @var InterviewSessionDataInterface
      */
-    private $data;
+    private $interviewSessionData;
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getInstanceDomain()
+    public function getProtocol()
     {
-        return $this->instanceDomain;
+        return $this->protocol;
     }
 
     /**
-     * @param mixed $instanceDomain
+     * @param mixed $protocol
      */
-    public function setInstanceDomain($instanceDomain)
+    public function setProtocol($protocol)
     {
-        $this->instanceDomain = $instanceDomain;
+        if (is_string($protocol)) {
+            $this->protocol = $protocol;
+        }
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    /**
+     * @param string $domain
+     */
+    public function setDomain($domain)
+    {
+        if (is_string($domain)) {
+            $this->domain = $domain;
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInstanceName()
+    {
+        return $this->instanceName;
+    }
+
+    /**
+     * @param string $instanceName
+     */
+    public function setInstanceName($instanceName)
+    {
+        if (is_string($instanceName)) {
+            $this->instanceName = $instanceName;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getFqdn()
+    {
+        if (!is_string($this->domain)) {
+            throw new LegacyExportException('domain not found', LegacyExportException::DOMAIN_NOT_FOUND);
+        }
+
+        if (!is_string($this->instanceName)) {
+            throw new LegacyExportException('instance name not found', LegacyExportException::INSTANCE_NAME_NOT_FOUND);
+        }
+
+        return $this->protocol . "://" . $this->instanceName . "." . $this->domain;
+    }
+
     public function getUri()
     {
-        return $this->uri;
-    }
-
-    /**
-     * @param mixed $uri
-     */
-    public function setUri($uri)
-    {
-        $this->uri = $uri;
+        return $this->getFqdn() . self::LEGACY_ENDPOINT;
     }
 
     /**
@@ -119,17 +169,24 @@ abstract class AbstractLegacyExport implements DocumentAssemblyExporterInterface
     /**
      * @return InterviewSessionDataInterface
      */
-    public function getData()
+    public function getInterviewSessionData()
     {
-        return $this->data;
+        return $this->interviewSessionData;
     }
 
     /**
-     * @param InterviewSessionDataInterface $data
+     * @param InterviewSessionDataInterface $interviewSessionData
      */
-    public function setData(InterviewSessionDataInterface $data)
+    public function setInterviewSessionData(InterviewSessionDataInterface $interviewSessionData)
     {
-        $this->data = $data;
+        $this->interviewSessionData = $interviewSessionData;
+    }
+
+    public function getExportTransportMethod()
+    {
+        $documentAssemblyData = $this->getInterviewSessionData();
+
+        return $documentAssemblyData->getInterviewSession() ? static::EDIT_TRANSPORT_METHOD : static::ADD_TRANSPORT_METHOD;
     }
 
     abstract public function export();

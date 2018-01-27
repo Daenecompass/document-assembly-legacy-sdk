@@ -31,15 +31,27 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-interface DocumentAssemblyExporterInterface
+interface DocumentAssemblyLegacyExportInterface
 {
-    public function getInstanceDomain();
+    const LEGACY_ENDPOINT = '/api/v1/interviewsession';
 
-    public function setInstanceDomain($instanceDomain);
+    /**
+     * @return string
+     */
+    public function getProtocol();
+
+    /**
+     * @param string $domain
+     */
+    public function setDomain($domain);
+
+    public function getInstanceName();
+
+    public function setInstanceName($instanceDomain);
+
+    public function getFqdn();
 
     public function getUri();
-
-    public function setUri($uri);
 
     public function getInstanceApiKey();
 
@@ -52,12 +64,19 @@ interface DocumentAssemblyExporterInterface
     /**
      * @return InterviewSessionDataInterface
      */
-    public function getData();
+    public function getInterviewSessionData();
 
     /**
      * @param InterviewSessionDataInterface $data
      */
-    public function setData(InterviewSessionDataInterface $data);
+    public function setInterviewSessionData(InterviewSessionDataInterface $data);
+
+    /**
+     * returns POST or PUT based on presence of interview session id in request data
+     *
+     * @return string
+     */
+    public function getExportTransportMethod();
 
     public function export();
 }
