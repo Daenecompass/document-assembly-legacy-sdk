@@ -39,6 +39,88 @@ use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionDataInterface;
 
 class ExportTest extends AbstractInterviewSessionDataTestCase
 {
+    public function testProtocol()
+    {
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         */
+        $exportMock = $exportMockBuilder->getMockForAbstractClass();
+
+        $exportMock->setProtocol('https');
+        $this->assertEquals(
+            'https',
+            $exportMock->getProtocol()
+        );
+
+    }
+
+    public function testDomain()
+    {
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         */
+        $exportMock = $exportMockBuilder->getMockForAbstractClass();
+
+        $exportMock->setDomain('example.invalid');
+
+        $this->assertEquals(
+            'example.invalid',
+            $exportMock->getDomain()
+        );
+    }
+
+    public function testInstanceName()
+    {
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         */
+        $exportMock = $exportMockBuilder->getMockForAbstractClass();
+
+        $exportMock->setInstanceName('example');
+
+        $this->assertEquals(
+            'example',
+            $exportMock->getInstanceName()
+        );
+    }
+
+    public function testInstanceApiKey()
+    {
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         */
+        $exportMock = $exportMockBuilder->getMockForAbstractClass();
+
+        $instanceApiKey = uniqid('chance_', true);
+        $exportMock->setInstanceApiKey($instanceApiKey);
+
+        $this->assertEquals(
+            $instanceApiKey,
+            $exportMock->getInstanceApiKey()
+        );
+    }
+
+    public function testUserApiKey()
+    {
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         */
+        $exportMock = $exportMockBuilder->getMockForAbstractClass();
+
+        $userApiKey = uniqid('chance_', true);
+        $exportMock->setUserApiKey($userApiKey);
+
+        $this->assertEquals(
+            $userApiKey,
+            $exportMock->getUserApiKey()
+        );
+    }
+
     public function testGetFqdnThrowsExceptionForUnsetDomain()
     {
         $this->expectException(LegacyExportException::class);

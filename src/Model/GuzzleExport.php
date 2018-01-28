@@ -31,52 +31,48 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-interface DocumentAssemblyLegacyExportInterface
+use GuzzleHttp\Client;
+
+class GuzzleExport extends AbstractLegacyExport
 {
-    const LEGACY_ENDPOINT = '/api/v1/interviewsession';
+    /**
+     * @var Client
+     */
+    private $client;
 
     /**
-     * @return string
+     * @return Client
      */
-    public function getProtocol();
+    public function getClient()
+    {
+        return $this->client;
+    }
 
     /**
-     * @param string $domain
+     * @param Client $client
      */
-    public function setDomain($domain);
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+    }
 
-    public function getInstanceName();
+    public function export()
+    {
+        $documentAssemblyData = $this->getInterviewSessionData();
 
-    public function setInstanceName($instanceDomain);
+        return $this->getClient()->request(
+            $this->getExportTransportMethod(),
+            $this->getUri(),
+            [
+                'json' => [
+                    'data' => $documentAssemblyData->json(),
+                ],
+                'auth' => [
+                    $this->getInstanceApiKey(),
+                    $this->getUserApiKey()
+                ]
+            ]
+        );
+    }
 
-    public function getFqdn();
-
-    public function getUri();
-
-    public function getInstanceApiKey();
-
-    public function setInstanceApiKey($instanceApiKey);
-
-    public function getUserApiKey();
-
-    public function setUserApiKey($userApiKey);
-
-    /**
-     * @return InterviewSessionDataInterface
-     */
-    public function getInterviewSessionData();
-
-    /**
-     * @param InterviewSessionDataInterface $data
-     */
-    public function setInterviewSessionData(InterviewSessionDataInterface $data);
-
-    /**
-     * returns POST or PUT based on presence of interview session id in request data
-     *
-     * @return string
-     */
-    public function getExportTransportMethod();
-
-    public function export();
 }

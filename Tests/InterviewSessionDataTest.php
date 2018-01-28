@@ -33,6 +33,33 @@ namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
 class InterviewSessionDataTest extends AbstractInterviewSessionDataTestCase
 {
+    public function testInterviewSession()
+    {
+        $data = $this->newInterviewSessionDataInstance();
+
+        $data->setInterviewSession(1);
+
+        $this->assertEquals(1, $data->getInterviewSession());
+    }
+
+    public function testInterviewSessionJson()
+    {
+        $data = $this->newInterviewSessionDataInstance();
+
+        $data->setInterviewSession(1);
+
+        $json = new \stdClass();
+        $json->Interview_ID = null;
+        $json->Note = null;
+        $json->_kf_InterviewSession_ID = 1;
+        $json->Answers = [];
+
+        $this->assertEquals(
+            json_encode($json),
+            $data->json()
+        );
+    }
+
     public function testAddAnswer()
     {
         $data = $this->newInterviewSessionDataInstance();

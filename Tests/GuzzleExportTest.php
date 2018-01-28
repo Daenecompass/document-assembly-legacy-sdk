@@ -31,10 +31,43 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
+use Chance\DocumentAssembly\LegacySdk\Model\GuzzleExport;
+use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
+use GuzzleHttp\Client;
+
 class GuzzleExportTest extends AbstractInterviewSessionDataTestCase
 {
     public function testExport()
     {
-        $this->assertTrue(false);
+        $interviewSessionDataMockBuilder = $this->getMockBuilder(InterviewSessionData::class);
+        $interviewSessionDataMockBuilder->setMethods(['json', 'getInterviewSession']);
+
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|InterviewSessionData $interviewSessionDataMock
+         */
+        $interviewSessionDataMock = $interviewSessionDataMockBuilder->getMock();
+        // make sure json method is called for exporting data
+        $interviewSessionDataMock->expects($this->once())->method('json');
+        $interviewSessionDataMock->method('getInterviewSession')->willReturn(null);
+
+        $clientMockBuilder = $this->getMockBuilder(Client::class);
+        $clientMockBuilder->setMethods(['request']);
+
+        /**
+         * @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock
+         */
+        $clientMock = $clientMockBuilder->getMock();
+        // make sure that client request is called when exporting
+        $clientMock->expects($this->once())->method('request');
+
+        $guzzleExport = new GuzzleExport();
+        $guzzleExport->setClient($clientMock);
+        $guzzleExport->setInterviewSessionData($interviewSessionDataMock);
+
+        // since we can't mock the returns for instance name and domain we set them
+        $guzzleExport->setInstanceName('foo');
+        $guzzleExport->setDomain('example.invalid');
+
+        $guzzleExport->export();
     }
 }

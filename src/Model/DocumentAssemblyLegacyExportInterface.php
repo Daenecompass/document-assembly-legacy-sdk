@@ -31,46 +31,62 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-use GuzzleHttp\Client;
-
-class GuzzleExport extends AbstractLegacyExport
+interface DocumentAssemblyLegacyExportInterface
 {
-    /**
-     * @var Client
-     */
-    private $client;
+    const LEGACY_ENDPOINT = '/api/v1/interviewsession';
 
     /**
-     * @return Client
+     * @return string
      */
-    public function getClient()
-    {
-        return $this->client;
-    }
+    public function getProtocol();
 
     /**
-     * @param Client $client
+     * @param mixed $protocol
      */
-    public function setClient(Client $client)
-    {
-        $this->client = $client;
-    }
+    public function setProtocol($protocol);
 
-    public function export()
-    {
-        $documentAssemblyData = $this->getInterviewSessionData();
+    /**
+     * @return string|null
+     */
+    public function getDomain();
 
-        $transportMethod = $this->getExportTransportMethod();
+    /**
+     * @param string $domain
+     */
+    public function setDomain($domain);
 
-        return $this->client->request(
-            $transportMethod,
-            $this->getUri(),
-            [
-                'json' => [
-                    'data' => $documentAssemblyData->json(),
-                ]
-            ]
-        );
-    }
+    public function getInstanceName();
 
+    public function setInstanceName($instanceDomain);
+
+    public function getFqdn();
+
+    public function getUri();
+
+    public function getInstanceApiKey();
+
+    public function setInstanceApiKey($instanceApiKey);
+
+    public function getUserApiKey();
+
+    public function setUserApiKey($userApiKey);
+
+    /**
+     * @return InterviewSessionDataInterface
+     */
+    public function getInterviewSessionData();
+
+    /**
+     * @param InterviewSessionDataInterface $data
+     */
+    public function setInterviewSessionData(InterviewSessionDataInterface $data);
+
+    /**
+     * returns POST or PUT based on presence of interview session id in request data
+     *
+     * @return string
+     */
+    public function getExportTransportMethod();
+
+    public function export();
 }

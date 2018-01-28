@@ -15,10 +15,15 @@
     ],
     "autoload": {
         "psr-4": {
-            "Chance\\DocumentAssembly\\LegacySdk\\": ""
+            "Chance\\DocumentAssembly\\LegacySdk\\": "src"
         }
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chance\\DocumentAssembly\\LegacySdk\\Tests\\": "Tests"
+        }
     }
 }
