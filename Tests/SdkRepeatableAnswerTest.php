@@ -31,7 +31,7 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
-use Chance\DocumentAssembly\LegacySdk\Model\SdkRepeatableRepreatableAnswer;
+use Chance\DocumentAssembly\LegacySdk\Model\SdkRepeatableAnswer;
 use Chance\DocumentAssembly\LegacySdk\Model\SdkRepreatableAnswerInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -39,7 +39,7 @@ class SdkRepeatableAnswerTest extends TestCase
 {
     public function testRepeatableTableRow()
     {
-        $answerMockBuilder = $this->getMockBuilder(SdkRepeatableRepreatableAnswer::class);
+        $answerMockBuilder = $this->getMockBuilder(SdkRepeatableAnswer::class);
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|SdkRepreatableAnswerInterface $answerMock
          */
@@ -65,7 +65,7 @@ class SdkRepeatableAnswerTest extends TestCase
 
     public function testRowCount()
     {
-        $answerMockBuilder = $this->getMockBuilder(SdkRepeatableRepreatableAnswer::class);
+        $answerMockBuilder = $this->getMockBuilder(SdkRepeatableAnswer::class);
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|SdkRepreatableAnswerInterface $answerMock
          */

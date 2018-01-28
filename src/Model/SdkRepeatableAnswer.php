@@ -31,7 +31,7 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-class SdkRepeatableRepreatableAnswer extends AbstractSdkAnswer implements SdkRepreatableAnswerInterface
+class SdkRepeatableAnswer extends AbstractSdkAnswer implements SdkRepreatableAnswerInterface
 {
     private $repeatableTableRow;
 
