@@ -57,7 +57,9 @@ class InterviewSessionData implements InterviewSessionDataInterface
      */
     public function setInterviewSession($interviewSession)
     {
-        $this->interviewSession = $interviewSession;
+        if (filter_var($interviewSession, FILTER_VALIDATE_INT)) {
+            $this->interviewSession = $interviewSession;
+        }
     }
 
     /**
@@ -73,7 +75,9 @@ class InterviewSessionData implements InterviewSessionDataInterface
      */
     public function setInterview($interview)
     {
-        $this->interview = $interview;
+        if (filter_var($interview, FILTER_VALIDATE_INT)) {
+            $this->interview = $interview;
+        }
     }
 
     /**

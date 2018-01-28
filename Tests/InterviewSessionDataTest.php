@@ -37,9 +37,40 @@ class InterviewSessionDataTest extends AbstractInterviewSessionDataTestCase
     {
         $data = $this->newInterviewSessionDataInstance();
 
+        // first test non-integer
+        $data->setInterviewSession(1.21);
+
+        $this->assertEquals(
+            null,
+            $data->getInterviewSession()
+        );
+
         $data->setInterviewSession(1);
 
-        $this->assertEquals(1, $data->getInterviewSession());
+        $this->assertEquals(
+            1,
+            $data->getInterviewSession()
+        );
+    }
+
+    public function testInterview()
+    {
+        $data = $this->newInterviewSessionDataInstance();
+
+        // first test non-integer
+        $data->setInterview(1.21);
+
+        $this->assertEquals(
+            null,
+            $data->getInterview()
+        );
+
+        $data->setInterview(1);
+
+        $this->assertEquals(
+            1,
+            $data->getInterview()
+        );
     }
 
     public function testInterviewSessionJson()
