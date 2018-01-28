@@ -35,4 +35,5 @@ class LegacyExportException extends \LogicException
 {
     const DOMAIN_NOT_FOUND = 100000;
     const INSTANCE_NAME_NOT_FOUND = 100001;
+    const MISSING_ANSWERS = 100002;
 }

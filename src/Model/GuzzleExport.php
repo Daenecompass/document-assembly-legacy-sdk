@@ -64,8 +64,8 @@ class GuzzleExport extends AbstractLegacyExport
             $this->getExportTransportMethod(),
             $this->getUri(),
             [
-                'json' => [
-                    'data' => $documentAssemblyData->json(),
+                'form_params' => [
+                    'data' => $documentAssemblyData->json()
                 ],
                 'auth' => [
                     $this->getInstanceApiKey(),

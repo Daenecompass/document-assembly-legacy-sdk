@@ -31,39 +31,59 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-
-interface InterviewSessionDataInterface
+abstract class AbstractAnswer implements AnswerInterface
 {
-    public function getInterviewSession();
+    private $field;
 
-    public function setInterviewSession($interviewSession);
+    private $value;
 
-    public function getInterview();
-
-    public function setInterview($interview);
-
-    public function getNote();
-
-    public function setNote($note);
+    private $name;
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function toJsonArray();
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
-     * @return AnswerInterface[]|array
+     * @param mixed $name
      */
-    public function getAnswers();
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
     /**
-     * @return object
+     * @return mixed
      */
-    public function jsonObject();
+    public function getField()
+    {
+        return $this->field;
+    }
 
     /**
-     * json endoded value of this object
-     * @return string
+     * @param mixed $field
      */
-    public function json();
+    public function setField($field)
+    {
+        $this->field = $field;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
 }

@@ -31,39 +31,8 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-
-interface InterviewSessionDataInterface
+class InterviewSessionAnswer extends AbstractAnswer implements InterviewSessionAnswerInterface
 {
-    public function getInterviewSession();
 
-    public function setInterviewSession($interviewSession);
 
-    public function getInterview();
-
-    public function setInterview($interview);
-
-    public function getNote();
-
-    public function setNote($note);
-
-    /**
-     * @return array
-     */
-    public function toJsonArray();
-
-    /**
-     * @return AnswerInterface[]|array
-     */
-    public function getAnswers();
-
-    /**
-     * @return object
-     */
-    public function jsonObject();
-
-    /**
-     * json endoded value of this object
-     * @return string
-     */
-    public function json();
 }

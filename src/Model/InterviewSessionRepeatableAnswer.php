@@ -31,39 +31,42 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-
-interface InterviewSessionDataInterface
+class InterviewSessionRepeatableAnswer extends AbstractAnswer implements RepreatableAnswerInterface
 {
-    public function getInterviewSession();
+    private $repeatableTableRow;
 
-    public function setInterviewSession($interviewSession);
-
-    public function getInterview();
-
-    public function setInterview($interview);
-
-    public function getNote();
-
-    public function setNote($note);
+    private $rowCount;
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function toJsonArray();
+    public function getRepeatableTableRow()
+    {
+        return $this->repeatableTableRow;
+    }
 
     /**
-     * @return AnswerInterface[]|array
+     * @param mixed $repeatableTableRow
      */
-    public function getAnswers();
+    public function setRepeatableTableRow($repeatableTableRow)
+    {
+        $this->repeatableTableRow = $repeatableTableRow;
+    }
 
     /**
-     * @return object
+     * @return mixed
      */
-    public function jsonObject();
+    public function getRowCount()
+    {
+        return $this->rowCount;
+    }
 
     /**
-     * json endoded value of this object
-     * @return string
+     * @param mixed $rowCount
      */
-    public function json();
+    public function setRowCount($rowCount)
+    {
+        $this->rowCount = $rowCount;
+    }
+
 }

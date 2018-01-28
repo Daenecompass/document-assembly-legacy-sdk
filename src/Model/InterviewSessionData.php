@@ -104,7 +104,10 @@ class InterviewSessionData implements InterviewSessionDataInterface
         $this->answers[] = $answer;
     }
 
-    public function json()
+    /**
+     * @return array
+     */
+    public function toJsonArray()
     {
         $json = [
             'Interview_ID' => $this->interview,
@@ -132,6 +135,19 @@ class InterviewSessionData implements InterviewSessionDataInterface
 
         $json['Answers'] = $jsonAnswers;
 
-        return json_encode((object) $json);
+        return $json;
+    }
+
+    /**
+     * @return object
+     */
+    public function jsonObject()
+    {
+        return (object) $this->toJsonArray();
+    }
+
+    public function json()
+    {
+        return json_encode($this->jsonObject());
     }
 }
