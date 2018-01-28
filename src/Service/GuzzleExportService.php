@@ -29,11 +29,11 @@
  *
  */
 
-namespace Chance\DocumentAssembly\LegacySdk\Model;
+namespace Chance\DocumentAssembly\LegacySdk\Service;
 
 use GuzzleHttp\Client;
 
-class GuzzleExport extends AbstractLegacyExport
+class GuzzleExportService extends AbstractLegacyExportService
 {
     /**
      * @var Client

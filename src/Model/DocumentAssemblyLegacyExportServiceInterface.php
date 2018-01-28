@@ -31,7 +31,7 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-interface DocumentAssemblyLegacyExportInterface
+interface DocumentAssemblyLegacyExportServiceInterface
 {
     const LEGACY_ENDPOINT = '/api/v1/interviewsession';
 

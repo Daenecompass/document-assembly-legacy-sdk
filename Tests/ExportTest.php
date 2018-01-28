@@ -32,18 +32,18 @@
 namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
 use Chance\DocumentAssembly\LegacySdk\Exception\LegacyExportException;
-use Chance\DocumentAssembly\LegacySdk\Model\AbstractLegacyExport;
-use Chance\DocumentAssembly\LegacySdk\Model\DocumentAssemblyLegacyExportInterface;
+use Chance\DocumentAssembly\LegacySdk\Model\DocumentAssemblyLegacyExportServiceInterface;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionDataInterface;
+use Chance\DocumentAssembly\LegacySdk\Service\AbstractLegacyExportService;
 
 class ExportTest extends AbstractInterviewSessionDataTestCase
 {
     public function testProtocol()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -57,9 +57,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
 
     public function testDomain()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -73,9 +73,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
 
     public function testInstanceName()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -89,9 +89,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
 
     public function testInstanceApiKey()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -106,9 +106,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
 
     public function testUserApiKey()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -126,9 +126,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
         $this->expectException(LegacyExportException::class);
         $this->expectExceptionCode(LegacyExportException::DOMAIN_NOT_FOUND);
 
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -143,9 +143,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
         $this->expectException(LegacyExportException::class);
         $this->expectExceptionCode(LegacyExportException::INSTANCE_NAME_NOT_FOUND);
 
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -160,9 +160,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
      */
     public function testGetFqdn()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -180,9 +180,9 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
      */
     public function testGetUri()
     {
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
@@ -190,7 +190,7 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
         $exportMock->setInstanceName('foo');
 
         $this->assertEquals(
-            $exportMock->getProtocol() . "://foo.example.invalid" . DocumentAssemblyLegacyExportInterface::LEGACY_ENDPOINT,
+            $exportMock->getProtocol() . "://foo.example.invalid" . DocumentAssemblyLegacyExportServiceInterface::LEGACY_ENDPOINT,
             $exportMock->getUri()
         );
     }
@@ -198,7 +198,7 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
     public function testGetExportTransportMethod()
     {
         $dataMockBuilder = $this->getMockBuilder(InterviewSessionData::class);
-        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExport::class);
+        $exportMockBuilder = $this->getMockBuilder(AbstractLegacyExportService::class);
 
         /**
          * @var \PHPUnit_Framework_MockObject_MockObject|InterviewSessionDataInterface $dataMock
@@ -209,7 +209,7 @@ class ExportTest extends AbstractInterviewSessionDataTestCase
         $dataMock->method('getInterviewSession')->will($this->onConsecutiveCalls(null, 1));
 
         /**
-         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportInterface $exportMock
+         * @var \PHPUnit_Framework_MockObject_MockObject|DocumentAssemblyLegacyExportServiceInterface $exportMock
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
         $exportMock->setInterviewSessionData($dataMock);

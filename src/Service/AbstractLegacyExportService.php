@@ -29,9 +29,11 @@
  *
  */
 
-namespace Chance\DocumentAssembly\LegacySdk\Model;
+namespace Chance\DocumentAssembly\LegacySdk\Service;
 
 use Chance\DocumentAssembly\LegacySdk\Exception\LegacyExportException;
+use Chance\DocumentAssembly\LegacySdk\Model\DocumentAssemblyLegacyExportServiceInterface;
+use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionDataInterface;
 
 /**
  * Class AbstractLegacyExport
@@ -39,7 +41,7 @@ use Chance\DocumentAssembly\LegacySdk\Exception\LegacyExportException;
  *
  * for use with DraftOnce/JustFillOut API v1
  */
-abstract class AbstractLegacyExport implements DocumentAssemblyLegacyExportInterface
+abstract class AbstractLegacyExportService implements DocumentAssemblyLegacyExportServiceInterface
 {
     const EDIT_TRANSPORT_METHOD = 'PUT';
     const ADD_TRANSPORT_METHOD = 'POST';

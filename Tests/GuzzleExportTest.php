@@ -31,7 +31,7 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
-use Chance\DocumentAssembly\LegacySdk\Model\GuzzleExport;
+use Chance\DocumentAssembly\LegacySdk\Service\GuzzleExportService;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
 use GuzzleHttp\Client;
 
@@ -60,7 +60,7 @@ class GuzzleExportTest extends AbstractInterviewSessionDataTestCase
         // make sure that client request is called when exporting
         $clientMock->expects($this->once())->method('request');
 
-        $guzzleExport = new GuzzleExport();
+        $guzzleExport = new GuzzleExportService();
         $guzzleExport->setClient($clientMock);
         $guzzleExport->setInterviewSessionData($interviewSessionDataMock);
 
