@@ -68,7 +68,9 @@ abstract class AbstractSdkAnswer implements SdkAnswerInterface
      */
     public function setField($field)
     {
-        $this->field = $field;
+        if (filter_var($field, FILTER_VALIDATE_INT)) {
+            $this->field = $field;
+        }
     }
 
     /**

@@ -39,4 +39,9 @@ interface SdkRepreatableAnswerInterface extends SdkAnswerInterface
     public function setRepeatableTableRow($repeatableTableRow);
 
     public function getRowCount();
+
+    /**
+     * @param mixed $rowCount
+     */
+    public function setRowCount($rowCount);
 }

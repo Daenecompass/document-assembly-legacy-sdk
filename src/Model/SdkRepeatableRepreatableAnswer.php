@@ -50,7 +50,9 @@ class SdkRepeatableRepreatableAnswer extends AbstractSdkAnswer implements SdkRep
      */
     public function setRepeatableTableRow($repeatableTableRow)
     {
-        $this->repeatableTableRow = $repeatableTableRow;
+        if (filter_var($repeatableTableRow, FILTER_VALIDATE_INT)) {
+            $this->repeatableTableRow = $repeatableTableRow;
+        }
     }
 
     /**
@@ -66,7 +68,9 @@ class SdkRepeatableRepreatableAnswer extends AbstractSdkAnswer implements SdkRep
      */
     public function setRowCount($rowCount)
     {
-        $this->rowCount = $rowCount;
+        if (filter_var($rowCount, FILTER_VALIDATE_INT)) {
+            $this->rowCount = $rowCount;
+        }
     }
 
 }
