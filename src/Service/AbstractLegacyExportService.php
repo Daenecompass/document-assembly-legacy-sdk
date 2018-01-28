@@ -48,7 +48,7 @@ abstract class AbstractLegacyExportService implements DocumentAssemblyLegacyExpo
 
     private $instanceName;
 
-    private $protocol = 'http';
+    private $protocol = 'https';
 
     protected $domain;
 
