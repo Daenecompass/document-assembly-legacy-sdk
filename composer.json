@@ -1,8 +1,9 @@
 {
-    "name": "chancegarcia/document-assembly-sdk",
-    "description": "sdk for Blue Burro DraftOnce and JustFillOut",
+    "name": "chancegarcia/document-assembly-legacy-sdk",
+    "description": "sdk for Blue Burro DraftOnce and JustFillOut API v1",
     "type": "library",
     "require": {
+        "php": ">=5.6",
         "guzzlehttp/guzzle": "^6.3"
     },
     "license": "MIT",
@@ -11,5 +12,18 @@
             "name": "chance garcia",
             "email": "develop@chancegarcia.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chance\\DocumentAssembly\\LegacySdk\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chance\\DocumentAssembly\\LegacySdk\\Tests\\": "Tests"
+        }
+    }
 }
