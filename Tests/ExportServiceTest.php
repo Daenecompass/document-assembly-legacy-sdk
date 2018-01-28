@@ -47,9 +47,15 @@ class ExportServiceTest extends AbstractInterviewSessionDataTestCase
          */
         $exportMock = $exportMockBuilder->getMockForAbstractClass();
 
-        $exportMock->setProtocol('https');
         $this->assertEquals(
             'https',
+            $exportMock->getProtocol(),
+            'default https value not found'
+        );
+
+        $exportMock->setProtocol('http');
+        $this->assertEquals(
+            'http',
             $exportMock->getProtocol()
         );
 
