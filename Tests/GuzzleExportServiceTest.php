@@ -35,7 +35,7 @@ use Chance\DocumentAssembly\LegacySdk\Service\GuzzleExportService;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
 use GuzzleHttp\Client;
 
-class GuzzleExportTest extends AbstractInterviewSessionDataTestCase
+class GuzzleExportServiceTest extends AbstractInterviewSessionDataTestCase
 {
     public function testExport()
     {

@@ -37,7 +37,7 @@ use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionDataInterface;
 use Chance\DocumentAssembly\LegacySdk\Service\AbstractLegacyExportService;
 
-class ExportTest extends AbstractInterviewSessionDataTestCase
+class ExportServiceTest extends AbstractInterviewSessionDataTestCase
 {
     public function testProtocol()
     {
