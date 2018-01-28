@@ -40,7 +40,7 @@ class InterviewSessionData implements InterviewSessionDataInterface
     private $note;
 
     /**
-     * @var AnswerInterface[]|array
+     * @var SdkAnswerInterface[]|array
      */
     protected $answers = [];
 
@@ -93,14 +93,14 @@ class InterviewSessionData implements InterviewSessionDataInterface
     }
 
     /**
-     * @return AnswerInterface[]|array
+     * @return SdkAnswerInterface[]|array
      */
     public function getAnswers()
     {
         return $this->answers;
     }
 
-    public function addAnswer(AnswerInterface $answer) {
+    public function addAnswer(SdkAnswerInterface $answer) {
         $this->answers[] = $answer;
     }
 
@@ -125,7 +125,7 @@ class InterviewSessionData implements InterviewSessionDataInterface
                 'Value' => $answer->getValue(),
             ];
 
-            if ($answer instanceof RepreatableAnswerInterface) {
+            if ($answer instanceof SdkRepreatableAnswerInterface) {
                 $jsonAnswer['_kf_RepeatableTableRow_ID'] = $answer->getRepeatableTableRow();
                 $jsonAnswer['RowCount'] = $answer->getRowCount();
             }

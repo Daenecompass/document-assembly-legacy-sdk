@@ -31,59 +31,8 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-abstract class AbstractAnswer implements AnswerInterface
+
+interface SdkInterviewSessionAnswerInterface extends SdkAnswerInterface
 {
-    private $field;
 
-    private $value;
-
-    private $name;
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getField()
-    {
-        return $this->field;
-    }
-
-    /**
-     * @param mixed $field
-     */
-    public function setField($field)
-    {
-        $this->field = $field;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
 }

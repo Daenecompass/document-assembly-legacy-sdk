@@ -32,13 +32,11 @@
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
 
-interface AnswerInterface
+interface SdkRepreatableAnswerInterface extends SdkAnswerInterface
 {
-    public function getField();
+    public function getRepeatableTableRow();
 
-    public function setField($field);
+    public function setRepeatableTableRow($repeatableTableRow);
 
-    public function getValue();
-
-    public function setValue($value);
+    public function getRowCount();
 }

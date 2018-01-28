@@ -31,8 +31,8 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Model;
 
-
-interface InterviewSessionAnswerInterface extends AnswerInterface
+class SdkInterviewSessionAnswer extends AbstractSdkAnswer implements SdkInterviewSessionAnswerInterface
 {
+
 
 }

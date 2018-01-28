@@ -31,10 +31,10 @@
 
 namespace Chance\DocumentAssembly\LegacySdk\Tests;
 
-use Chance\DocumentAssembly\LegacySdk\Model\AnswerInterface;
-use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionAnswerInterface;
+use Chance\DocumentAssembly\LegacySdk\Model\SdkAnswerInterface;
+use Chance\DocumentAssembly\LegacySdk\Model\SdkInterviewSessionAnswerInterface;
 use Chance\DocumentAssembly\LegacySdk\Model\InterviewSessionData;
-use Chance\DocumentAssembly\LegacySdk\Model\RepreatableAnswerInterface;
+use Chance\DocumentAssembly\LegacySdk\Model\SdkRepreatableAnswerInterface;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractInterviewSessionDataTestCase extends TestCase
@@ -42,7 +42,7 @@ abstract class AbstractInterviewSessionDataTestCase extends TestCase
     /**
      * @param string $type
      * @param int $num
-     * @return array|\PHPUnit_Framework_MockObject_MockObject[]|AnswerInterface[]|RepreatableAnswerInterface[]
+     * @return array|\PHPUnit_Framework_MockObject_MockObject[]|SdkAnswerInterface[]|SdkRepreatableAnswerInterface[]
      */
     protected function generateAnswers($type = 'mixed', $num = 1)
     {
@@ -66,21 +66,21 @@ abstract class AbstractInterviewSessionDataTestCase extends TestCase
     /**
      * @param string $type
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|AnswerInterface|RepreatableAnswerInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|SdkAnswerInterface|SdkRepreatableAnswerInterface
      */
     protected function generateAnswer($type = 'mixed')
     {
         switch (strtolower($type)) {
             case 'normal':
-                $class = InterviewSessionAnswerInterface::class;
+                $class = SdkInterviewSessionAnswerInterface::class;
                 break;
             case 'repeatable':
-                $class = RepreatableAnswerInterface::class;
+                $class = SdkRepreatableAnswerInterface::class;
                 break;
             case 'mixed':
                 // no break
             default:
-                $class = mt_rand(0, 1) ? InterviewSessionAnswerInterface::class : RepreatableAnswerInterface::class;
+                $class = mt_rand(0, 1) ? SdkInterviewSessionAnswerInterface::class : SdkRepreatableAnswerInterface::class;
                 break;
         }
 
@@ -91,7 +91,7 @@ abstract class AbstractInterviewSessionDataTestCase extends TestCase
         $answer->method('getField')->willReturn(mt_rand());
         $answer->method('getValue')->willReturn(uniqid('chance_', false));
 
-        if ($answer instanceof RepreatableAnswerInterface) {
+        if ($answer instanceof SdkRepreatableAnswerInterface) {
             $answer->method('getRepeatableTableRow')->willReturn(mt_rand());
             $answer->method('getRowCount')->willReturn(mt_rand());
         }
@@ -101,17 +101,17 @@ abstract class AbstractInterviewSessionDataTestCase extends TestCase
     }
 
     /**
-     * @param AnswerInterface $mockAnswer
+     * @param SdkAnswerInterface $mockAnswer
      * @return string
      */
-    protected function convertMockAnswerToJsonAnswer(AnswerInterface $mockAnswer)
+    protected function convertMockAnswerToJsonAnswer(SdkAnswerInterface $mockAnswer)
     {
         $jsonAnswer = new \stdClass();
 
         $jsonAnswer->Field_ID = $mockAnswer->getField();
         $jsonAnswer->Value = $mockAnswer->getValue();
 
-        if ($mockAnswer instanceof RepreatableAnswerInterface) {
+        if ($mockAnswer instanceof SdkRepreatableAnswerInterface) {
             $jsonAnswer->_kf_RepeatableTableRow_ID = $mockAnswer->getRepeatableTableRow();
             $jsonAnswer->RowCount = $mockAnswer->getRowCount();
         }

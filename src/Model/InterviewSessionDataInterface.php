@@ -52,7 +52,7 @@ interface InterviewSessionDataInterface
     public function toJsonArray();
 
     /**
-     * @return AnswerInterface[]|array
+     * @return SdkAnswerInterface[]|array
      */
     public function getAnswers();
 
